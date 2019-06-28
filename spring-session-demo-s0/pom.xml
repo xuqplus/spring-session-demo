@@ -13,19 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-session-demo-s0</name>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
     <profiles>
         <profile>
             <id>dev</id>
@@ -34,18 +21,21 @@
             </activation>
             <properties>
                 <pom.server.port>20008</pom.server.port>
+                <pom.spring.redis.host>localhost</pom.spring.redis.host>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
                 <pom.server.port>8080</pom.server.port>
+                <pom.spring.redis.host>Tool-redis</pom.spring.redis.host>
             </properties>
         </profile>
         <profile>
             <id>prod</id>
             <properties>
                 <pom.server.port>8080</pom.server.port>
+                <pom.spring.redis.host>Tool-redis</pom.spring.redis.host>
             </properties>
         </profile>
     </profiles>
