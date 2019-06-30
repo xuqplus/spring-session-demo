@@ -17,6 +17,7 @@
 
     <modules>
         <module>spring-session-demo-base</module>
+        <module>spring-session-demo-oauth-server</module>
         <module>spring-session-demo-s0</module>
         <module>spring-session-demo-s1</module>
     </modules>
