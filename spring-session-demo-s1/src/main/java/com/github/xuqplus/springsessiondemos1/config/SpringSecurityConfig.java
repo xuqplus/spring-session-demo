@@ -1,4 +1,4 @@
-package com.github.xuqplus.springsessiondemos0.config;
+package com.github.xuqplus.springsessiondemos1.config;
 
 import com.github.xuqplus.springsessiondemobase.service.MyAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
