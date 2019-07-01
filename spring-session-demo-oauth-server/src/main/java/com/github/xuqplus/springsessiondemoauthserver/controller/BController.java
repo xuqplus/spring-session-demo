@@ -1,4 +1,4 @@
-package com.github.xuqplus.springsessiondemosso.controller;
+package com.github.xuqplus.springsessiondemoauthserver.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

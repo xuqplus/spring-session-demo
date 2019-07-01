@@ -6,11 +6,12 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.xuqplus</groupId>
-    <artifactId>spring-session-demo-oauth-server</artifactId>
+    <artifactId>spring-session-demo-oauth-resource-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-session-demo-oauth-server</name>
+    <name>spring-session-demo-oauth-resource-server</name>
 
     <dependencies>
         <dependency>
@@ -56,7 +57,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <pom.server.port>20010</pom.server.port>
+                <pom.server.port>20020</pom.server.port>
                 <pom.spring.redis.host>localhost</pom.spring.redis.host>
             </properties>
         </profile>

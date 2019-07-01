@@ -1,4 +1,4 @@
-package com.github.xuqplus.springsessiondemosso.config;
+package com.github.xuqplus.springsessiondemoauthserver.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,13 +20,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin().and()
             .authorizeRequests()
             .antMatchers("/", "/all", "/index.html").permitAll()
-            .antMatchers("/oauth/token").permitAll()
+            .antMatchers("/oauth/**").permitAll()
             .antMatchers("/normal").hasRole("normal")
             .antMatchers("/admin").hasRole("admin")
             .antMatchers("/root").hasRole("root")
             .anyRequest().authenticated().and()
             .csrf().disable();
-//            .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable();
   }
 
   @Autowired

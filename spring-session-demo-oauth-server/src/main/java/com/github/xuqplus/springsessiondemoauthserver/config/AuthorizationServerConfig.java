@@ -1,4 +1,4 @@
-package com.github.xuqplus.springsessiondemosso.config;
+package com.github.xuqplus.springsessiondemoauthserver.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +17,8 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 /**
  * http://localhost:20010/oauth/authorize?client_id=client&response_type=code&redirect_uri=http://localhost:20008/
- * <p>
- * Basic Y2xpZW50OnNlY3JldA==
+ *
+ * <p>Basic Y2xpZW50OnNlY3JldA==
  */
 @Configuration
 @EnableAuthorizationServer
@@ -28,32 +28,35 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     // 使用内存存储OAuth客户端信息
     String secret = "secret";
     String noop = String.format("{noop}%s", secret);
-//    String bcrypt = String.format("{bcrypt}%s", new BCryptPasswordEncoder().encode(secret));
-//    String scrypt = String.format("{scrypt}%s", new SCryptPasswordEncoder().encode(secret));
+    //    String bcrypt = String.format("{bcrypt}%s", new BCryptPasswordEncoder().encode(secret));
+    //    String scrypt = String.format("{scrypt}%s", new SCryptPasswordEncoder().encode(secret));
     clients
-            .inMemory()
-            .withClient("client") //
-            .secret(noop) //
-            .authorizedGrantTypes("authorization_code", "implicit", "refresh_token") //
-//            .authorizedGrantTypes("password", "authorization_code", "implicit", "refresh_token") //
-            .resourceIds("resourceId") //
-            .redirectUris("http://localhost:20008/") //
-            .scopes("aaa", "bbb", "ccc");
+        .inMemory()
+        .withClient("client") //
+        .secret(noop) //
+        // .authorizedGrantTypes("authorization_code", "implicit", "refresh_token") //
+        .authorizedGrantTypes(
+            "password", "authorization_code", "implicit", "refresh_token") // 测试方便起见打开password模式
+        .resourceIds("resourceId") //
+        .redirectUris("http://localhost:20008/") //
+        .scopes("aaa", "bbb", "ccc");
   }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints
-            .tokenStore(tokenStore)
-            .approvalStore(approvalStore)
-            .authenticationManager(authenticationManager)
-            .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+        .tokenStore(tokenStore)
+        .approvalStore(approvalStore)
+        .authenticationManager(authenticationManager)
+        .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
   }
 
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-    super.configure(security);
-//    security.allowFormAuthenticationForClients();
+    security
+        .allowFormAuthenticationForClients()
+        .tokenKeyAccess("permitAll()")
+        .checkTokenAccess("isAuthenticated()");
   }
 
   @Bean
@@ -69,16 +72,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   }
 
   //  @Bean
-//  PasswordEncoder passwordEncoder() {
-//    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//  }
+  //  PasswordEncoder passwordEncoder() {
+  //    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  //  }
 
-  @Autowired
-  TokenStore tokenStore;
+  @Autowired TokenStore tokenStore;
 
-  @Autowired
-  AuthenticationManager authenticationManager;
+  @Autowired AuthenticationManager authenticationManager;
 
-  @Autowired
-  ApprovalStore approvalStore;
+  @Autowired ApprovalStore approvalStore;
 }

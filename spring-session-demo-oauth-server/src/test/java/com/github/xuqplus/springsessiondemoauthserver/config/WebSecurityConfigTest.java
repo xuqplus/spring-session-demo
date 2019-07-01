@@ -1,4 +1,4 @@
-package com.github.xuqplus.springsessiondemosso.config;
+package com.github.xuqplus.springsessiondemoauthserver.config;
 
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
