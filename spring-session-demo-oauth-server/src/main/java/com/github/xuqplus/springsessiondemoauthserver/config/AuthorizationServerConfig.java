@@ -40,8 +40,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     "password", "authorization_code", "implicit", "refresh_token") // 测试方便起见打开password模式
             .resourceIds("resourceId") //
             .redirectUris(
-                    "http://localhost:20001/login",
                     "http://192.168.0.107:20001/login",
+                    "http://localhost:20001/login",
+                    "http://aaa.local:20001/login",
+                    "http://bbb.local:20001/login",
+                    "http://192.168.0.107:20002/login",
+                    "http://localhost:20002/login",
+                    "http://aaa.local:20002/login",
+                    "http://bbb.local:20002/login",
                     "http://localhost:20008/"
             ) //
             .scopes("aaa", "bbb", "ccc", "ddd")
@@ -55,8 +61,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     "password", "authorization_code", "implicit", "refresh_token") // 测试方便起见打开password模式
             .resourceIds("resourceId") //
             .redirectUris(
+                    "http://192.168.0.107:20001/login",
+                    "http://localhost:20001/login",
+                    "http://aaa.local:20001/login",
+                    "http://bbb.local:20001/login",
+                    "http://192.168.0.107:20002/login",
                     "http://localhost:20002/login",
-                    "http://192.168.0.107:20002/login"
+                    "http://aaa.local:20002/login",
+                    "http://bbb.local:20002/login",
+                    "http://localhost:20008/"
             ) //
             .scopes("aaa", "bbb", "ccc", "ddd");
   }
