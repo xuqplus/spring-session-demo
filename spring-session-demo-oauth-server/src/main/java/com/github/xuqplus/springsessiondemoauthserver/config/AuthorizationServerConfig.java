@@ -31,36 +31,51 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     //    String bcrypt = String.format("{bcrypt}%s", new BCryptPasswordEncoder().encode(secret));
     //    String scrypt = String.format("{scrypt}%s", new SCryptPasswordEncoder().encode(secret));
     clients
-        .inMemory()
-        .withClient("client") //
-        .secret(noop) //
-        // .authorizedGrantTypes("authorization_code", "implicit", "refresh_token") //
-        .authorizedGrantTypes(
-            "password", "authorization_code", "implicit", "refresh_token") // 测试方便起见打开password模式
-        .resourceIds("resourceId") //
-        .redirectUris(
-                "http://localhost:20001/login",
-                "http://192.168.0.107:20001/login",
-                "http://localhost:20008/"
-        ) //
-        .scopes("aaa", "bbb", "ccc", "ddd");
+            .inMemory()
+            /** client */
+            .withClient("client") //
+            .secret(noop) //
+            // .authorizedGrantTypes("authorization_code", "implicit", "refresh_token") //
+            .authorizedGrantTypes(
+                    "password", "authorization_code", "implicit", "refresh_token") // 测试方便起见打开password模式
+            .resourceIds("resourceId") //
+            .redirectUris(
+                    "http://localhost:20001/login",
+                    "http://192.168.0.107:20001/login",
+                    "http://localhost:20008/"
+            ) //
+            .scopes("aaa", "bbb", "ccc", "ddd")
+
+            /** client2 */
+            .and()
+            .withClient("client2") //
+            .secret(noop) //
+            // .authorizedGrantTypes("authorization_code", "implicit", "refresh_token") //
+            .authorizedGrantTypes(
+                    "password", "authorization_code", "implicit", "refresh_token") // 测试方便起见打开password模式
+            .resourceIds("resourceId") //
+            .redirectUris(
+                    "http://localhost:20002/login",
+                    "http://192.168.0.107:20002/login"
+            ) //
+            .scopes("aaa", "bbb", "ccc", "ddd");
   }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
     endpoints
-        .tokenStore(tokenStore)
-        .approvalStore(approvalStore)
-        .authenticationManager(authenticationManager)
-        .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+            .tokenStore(tokenStore)
+            .approvalStore(approvalStore)
+            .authenticationManager(authenticationManager)
+            .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
   }
 
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
     security
-        .allowFormAuthenticationForClients()
-        .tokenKeyAccess("permitAll()")
-        .checkTokenAccess("isAuthenticated()");
+            .allowFormAuthenticationForClients()
+            .tokenKeyAccess("permitAll()")
+            .checkTokenAccess("isAuthenticated()");
   }
 
   @Bean
@@ -80,9 +95,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   //    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
   //  }
 
-  @Autowired TokenStore tokenStore;
+  @Autowired
+  TokenStore tokenStore;
 
-  @Autowired AuthenticationManager authenticationManager;
+  @Autowired
+  AuthenticationManager authenticationManager;
 
-  @Autowired ApprovalStore approvalStore;
+  @Autowired
+  ApprovalStore approvalStore;
 }
