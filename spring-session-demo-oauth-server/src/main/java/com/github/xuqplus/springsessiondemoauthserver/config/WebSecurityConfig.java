@@ -33,7 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     builder
             .inMemoryAuthentication().passwordEncoder(encoder)
-            .withUser("normal").password(encoder.encode("123456")).roles("normal").and()
+            // role会转换成权限ROLE_${role}, 设置了权限时role会被忽略
+            .withUser("normal").password(encoder.encode("123456")).roles("normal").authorities("normal2").and()
             .withUser("admin").password(encoder.encode("123456")).roles("admin").and()
             .withUser("root").password(encoder.encode("123456")).roles("root");
   }
