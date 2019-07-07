@@ -9,3 +9,9 @@
 ![](https://github.com/xuqplus/spring-session-demo/raw/master/%E6%95%88%E6%9E%9C.png)
 
 另外从图中发现, 浏览器并不区分cookie的端口号..
+
+____
+更新 spring security resource server 资源服务器
+
+____
+更新 spring sso client 单点登录
