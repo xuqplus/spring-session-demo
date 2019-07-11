@@ -30,4 +30,14 @@ public class BController {
   public String a() {
     return "index";
   }
+
+  @RequestMapping("aaa")
+  public String aaa() {
+    return "aaa";
+  }
+
+  @RequestMapping("bbb")
+  public String bbb() {
+    return "bbb";
+  }
 }
